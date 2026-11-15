@@ -8,6 +8,8 @@ export type Symptom = (typeof SYMPTOMS)[number];
 
 export interface CheckIn {
   sleep_h?: number; sleep_q?: number; mood?: number; stress?: number; fatigue?: number; workload?: number; social?: number;
+  /** bedtime and wake-up time, HH:MM (optional; when both are set sleep_h is computed from them) */
+  bed?: string; wake?: string;
   symptoms?: Symptom[]; note?: string; sim?: boolean;
 }
 export interface Wearable { rhr?: number; hrv?: number; sleep_h?: number; spo2?: number; active_min?: number; skin_temp?: number; sim?: boolean }
@@ -45,6 +47,45 @@ export function baseline(days: Day[], k: MetricKey) {
   return median(first.length >= 3 ? first : days.map((d) => val(d, k)).filter((v): v is number => v != null));
 }
 
+/* ---------- sleep schedule ---------- */
+/** NASA plans 8.5 h of sleep opportunity on the ISS; 8 h asleep is the target used here */
+export const SLEEP_TARGET = 8;
+const toMin = (hhmm?: string) => { const m = /^(\d{1,2}):(\d{2})$/.exec(hhmm ?? ''); return m ? +m[1] * 60 + +m[2] : null; };
+const fromMin = (m: number) => { const x = ((Math.round(m) % 1440) + 1440) % 1440; return `${String(Math.floor(x / 60)).padStart(2, '0')}:${String(x % 60).padStart(2, '0')}`; };
+/** hours between bedtime and wake-up, across midnight */
+export function hoursBetween(bed?: string, wake?: string): number | null {
+  const b = toMin(bed), w = toMin(wake); if (b == null || w == null) return null;
+  const d = (w - b + 1440) % 1440; return d === 0 ? null : Math.round((d / 60) * 4) / 4;
+}
+/** bedtimes after midnight count as late (e.g. 01:00 -> 25:00) so the mean and spread make sense */
+const bedAxis = (m: number) => (m < 12 * 60 ? m + 1440 : m);
+const sd = (a: number[]) => { if (a.length < 2) return 0; const mu = a.reduce((x, y) => x + y, 0) / a.length; return Math.sqrt(a.reduce((x, y) => x + (y - mu) ** 2, 0) / a.length); };
+export interface SleepStats {
+  nights: { day: string; h: number | null }[];
+  avg: number | null; debt: number; short: number;
+  /** spread of bedtime in minutes (lower = more regular) */
+  spread: number | null; bed: string | null; wake: string | null;
+  /** suggested bedtime to reach the target with the usual wake-up time */
+  recBed: string | null;
+}
+export function sleepStats(days: Day[], n = 7): SleepStats {
+  const last = days.slice(-n);
+  const nights = last.map((d) => ({ day: d.day, h: val(d, 'sleep') }));
+  const hs = nights.map((x) => x.h).filter((v): v is number => v != null);
+  const beds = last.map((d) => toMin(d.c?.bed)).filter((v): v is number => v != null).map(bedAxis);
+  const wakes = last.map((d) => toMin(d.c?.wake)).filter((v): v is number => v != null);
+  const mean = (a: number[]) => a.reduce((x, y) => x + y, 0) / a.length;
+  const wake = wakes.length ? mean(wakes) : null;
+  return {
+    nights, avg: hs.length ? mean(hs) : null,
+    debt: Math.round(hs.reduce((a, h) => a + Math.max(0, SLEEP_TARGET - h), 0) * 10) / 10,
+    short: hs.filter((h) => h < 6).length,
+    spread: beds.length >= 3 ? Math.round(sd(beds)) : null,
+    bed: beds.length ? fromMin(mean(beds)) : null, wake: wake != null ? fromMin(wake) : null,
+    recBed: wake != null ? fromMin(wake - SLEEP_TARGET * 60 - 15) : null,
+  };
+}
+
 /* ---------- alerts (HRP risks) ---------- */
 export type Tone = 'ok' | 'watch' | 'warn' | 'crit';
 export interface WAlert {
@@ -55,9 +96,12 @@ export interface WAlert {
 }
 const lastN = (days: Day[], n: number) => days.slice(-n);
 
-export function analyze(days: Day[]) {
+/** camera fatigue sessions (ASTRA Vision) of the same person, used to confirm what the check-in says */
+export interface VisionDay { day: string; fatigue: number | null; peak: number | null }
+
+export function analyze(days: Day[], vision: VisionDay[] = []) {
   const alerts: WAlert[] = [];
-  if (!days.length) return { alerts, score: null as number | null, base: {} as Partial<Record<MetricKey, number | null>> };
+  if (!days.length && !vision.length) return { alerts, score: null as number | null, base: {} as Partial<Record<MetricKey, number | null>> };
   const keys: MetricKey[] = ['sleep', 'mood', 'stress', 'fatigue', 'rhr', 'hrv', 'spo2'];
   const base = Object.fromEntries(keys.map((k) => [k, baseline(days, k)])) as Partial<Record<MetricKey, number | null>>;
   const recent = lastN(days, 3);
@@ -141,6 +185,30 @@ export function analyze(days: Day[]) {
       hrp: ['Peligro HRP: ambiente cerrado y hostil', 'HRP hazard: hostile and closed environment'] });
     score += 10;
   }
+  // objective fatigue measured by the camera in the last 3 days
+  const since = days.length ? days[Math.max(0, days.length - 3)].day : '';
+  const vis = vision.filter((v) => v.day >= since && v.peak != null);
+  const highVis = vis.filter((v) => (v.peak ?? 0) >= 60);
+  if (highVis.length) {
+    const peak = Math.max(...highVis.map((v) => v.peak ?? 0));
+    const withSleep = sl.length >= 2 && short >= 1;
+    alerts.push({ key: 'vision', tone: highVis.length >= 2 || withSleep ? 'crit' : 'warn',
+      title: ['Fatiga medida por la cámara', 'Fatigue measured by the camera'],
+      detail: [`${highVis.length} sesión${highVis.length > 1 ? 'es' : ''} de ASTRA Vision con fatiga alta (pico ${peak}/100) en los últimos 3 días${withSleep ? ', coincidiendo con noches cortas' : ''}.`, `${highVis.length} ASTRA Vision session${highVis.length > 1 ? 's' : ''} with high fatigue (peak ${peak}/100) in the last 3 days${withSleep ? ', matching short nights' : ''}.`],
+      action: ['Evitar tareas críticas al final del turno, adelantar el descanso y repetir la medida tras dormir.', 'Avoid critical tasks late in the shift, bring rest forward and repeat the measurement after sleep.'],
+      hrp: ['Riesgo HRP: pérdida de sueño, desajuste circadiano y sobrecarga de trabajo', 'HRP risk: sleep loss, circadian desynchronization and work overload'] });
+    score += highVis.length >= 2 || withSleep ? 25 : 15;
+  }
+  // irregular schedule (circadian)
+  const st = sleepStats(days);
+  if (st.spread != null && st.spread > 90) {
+    alerts.push({ key: 'circadian', tone: 'watch',
+      title: ['Horario de sueño irregular', 'Irregular sleep schedule'],
+      detail: [`La hora de acostarse varía ±${st.spread} min en la última semana.`, `Bedtime varies ±${st.spread} min over the last week.`],
+      action: ['Fijar una hora de acostarse estable, luz azul por la mañana y luz tenue 1 h antes de dormir.', 'Keep a steady bedtime, blue-enriched light in the morning and dim light 1 h before sleep.'],
+      hrp: ['Riesgo HRP: desajuste circadiano', 'HRP risk: circadian desynchronization'] });
+    score += 8;
+  }
   return { alerts, score: Math.min(100, score), base };
 }
 
@@ -183,7 +251,7 @@ export function exampleDays(end = todayIso()): { day: string; c: CheckIn; w: Wea
     const lik = (base: number) => Math.max(1, Math.min(5, Math.round(base + j(1.2))));
     out.push({
       day,
-      c: { sleep_h: sleep, sleep_q: lik(hard ? 2 : 4), mood: lik(hard ? 2 : rec ? 3 : 4), stress: lik(hard ? 4.2 : 2), fatigue: lik(hard ? 4 : 2),
+      c: { sleep_h: sleep, bed: fromMin((hard ? 345 : 390) - sleep * 60), wake: hard ? '05:45' : '06:30', sleep_q: lik(hard ? 2 : 4), mood: lik(hard ? 2 : rec ? 3 : 4), stress: lik(hard ? 4.2 : 2), fatigue: lik(hard ? 4 : 2),
         workload: lik(hard ? 4.5 : 3), social: lik(hard ? 2.2 : 4), symptoms: hard && n % 3 === 0 ? ['headache', 'congestion'] : hard && n === 13 ? ['insomnia'] : [], sim: true },
       w: { rhr: Math.round(hard ? 66 + j(4) : 58 + j(3)), hrv: Math.round(hard ? 44 + j(6) : rec ? 55 + j(6) : 62 + j(6)), sleep_h: sleep,
         spo2: Math.round(97 + j(2)), active_min: Math.round(hard ? 25 + j(10) : 45 + j(12)), skin_temp: +(33.6 + j(0.6)).toFixed(1), sim: true },
