@@ -3,9 +3,52 @@
 import { Badge, Card, Dot, Meter, toneOf } from '@/components/app/ui';
 import { useBay } from '@/components/bay/BayContext';
 import {
-  D, FIRST_POST, globalScore, lvlOfScore, NOSYS, ORDER, pointOf, sysScore, TPS, valLevel, type Level, type Marker,
+  D, FIRST_POST, globalScore, lvlOfScore, ORDER, pointOf, sysScore, TPS, valLevel, type Level, type Marker,
 } from '@/lib/bay/model';
 import { useBayText } from '@/lib/bay/text';
+import { useEffect, useState } from 'react';
+import { getStore, STORE_EVENT } from '@/lib/store';
+import HRV from '@/data/hrv_reference.json';
+
+/** heart rate / HRV row: the person's own wearable data when imported, otherwise a REAL public human reference
+ *  (PhysioNet healthy adults, same sex). NASA publishes no heart rate or HRV for this crew. */
+function HeartRow({ crew }: { crew: string }) {
+  const { L } = useBayText();
+  const [own, setOwn] = useState<{ rhr?: number; hrv?: number; day: string } | null>(null);
+  useEffect(() => {
+    let live = true;
+    const load = async () => {
+      const rows = (await getStore().list('daily')).filter((r) => r.crew_id === crew && r.source === 'wearable' && !r.deleted).sort((a, b) => b.day.localeCompare(a.day));
+      for (const r of rows) {
+        try { const m = JSON.parse(r.metrics_json) as { rhr?: number; hrv?: number }; if (m.rhr != null || m.hrv != null) { if (live) setOwn({ rhr: m.rhr, hrv: m.hrv, day: r.day }); return; } } catch { /* skip */ }
+      }
+      if (live) setOwn(null);
+    };
+    void load();
+    const on = () => void load();
+    window.addEventListener(STORE_EVENT, on);
+    return () => { live = false; window.removeEventListener(STORE_EVENT, on); };
+  }, [crew]);
+  if (own) {
+    return (
+      <a className="sys" href="/system/wellbeing#tendencias" title={L(`Wearable de esta persona · ${own.day}`, `This person's wearable · ${own.day}`)}>
+        <span className="nm"><Dot tone="real" />{L('Ritmo cardiaco / HRV', 'Heart rate / HRV')}</span>
+        <span className="note">{own.rhr != null ? `${Math.round(own.rhr)} ${L('lpm', 'bpm')} · ` : ''}{own.hrv != null ? `RMSSD ${Math.round(own.hrv)} ms · ` : ''}{L('wearable', 'wearable')} {own.day.slice(5)}</span>
+        <span className="sc" />
+      </a>
+    );
+  }
+  const ref = D.sex[crew] === 'F' ? HRV.F : HRV.M;
+  return (
+    <a className="sys hr-ref" href={HRV.doi} target="_blank" rel="noopener noreferrer"
+      title={L(`Referencia REAL de ${ref.n} adultos sanos (${ref.ages[0]}–${ref.ages[1]} años, mismo sexo), Holter de 24 h · ${HRV.source} · no son datos de esta tripulación`,
+        `REAL reference from ${ref.n} healthy adults (${ref.ages[0]}–${ref.ages[1]} y, same sex), 24 h Holter · ${HRV.source} · not this crew's data`)}>
+      <span className="nm"><Dot tone="real" dashed />{L('Ritmo cardiaco / HRV', 'Heart rate / HRV')}</span>
+      <span className="note">{Math.round(ref.hr)} {L('lpm', 'bpm')} · RMSSD {Math.round(ref.rmssd)} ms · {L('ref. real PhysioNet, no es la tripulación', 'real PhysioNet ref., not the crew')}</span>
+      <span className="sc" />
+    </a>
+  );
+}
 
 const LEVEL_TONE = ['ok', 'watch', 'warn', 'crit'] as const;
 const levelTone = (l: Level | null) => (l == null ? 'none' : LEVEL_TONE[l]);
@@ -48,7 +91,7 @@ function Spark({ m, crew, tp }: { m: Marker; crew: string; tp: number }) {
 }
 
 export default function Status() {
-  const { crew, tp, sys, setSys, vision } = useBay();
+  const { crew, tp, sys, setSys } = useBay();
   const { L, fmtV, fmtP, sysName, mkLabel, crewLabel, tpName } = useBayText();
   const s = D.systems[sys];
   return (
@@ -65,22 +108,8 @@ export default function Status() {
               </button>
             );
           })}
-          {NOSYS.map((n) => {
-            if (n.k === 'sueno' && vision) {
-              const v = Math.max(vision.fatigue, vision.stress); const tone = toneOf(lvlOfScore(v));
-              return (
-                <a key={n.k} className="sys" href="/system/fatigue" title={`ASTRA Vision (${vision.src})`}>
-                  <span className="nm"><Dot tone={tone} />{L('Fatiga y estrés', 'Fatigue & stress')}</span><Meter value={v} tone={tone} /><span className="sc">{v}</span>
-                </a>
-              );
-            }
-            return (
-              <div key={n.k} className="sys nodata">
-                <span className="nm"><Dot tone="none" dashed />{L(n.es, n.en)}</span>
-                <span className="note">{L('sin datos públicos · ver simulador', 'no public data · see simulator')}</span><span className="sc">–</span>
-              </div>
-            );
-          })}
+          {/* rows without public data (brain & eyes, sleep & stress) are not shown; heart rate uses real data */}
+          <HeartRow crew={crew} />
         </div>
       </div>
 

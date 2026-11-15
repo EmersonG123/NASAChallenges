@@ -1,0 +1,135 @@
+{
+  "source": "PhysioNet · RR interval time series from healthy subjects v1.0.0 (Irurzun et al., 2021)",
+  "doi": "https://doi.org/10.13026/51yd-d219",
+  "license": "CC BY 4.0",
+  "method": "24 h Holter, RR 300–2000 ms; RMSSD over successive differences < 200 ms (segments were concatenated after artifact removal); median per sex.",
+  "generated": "2026-11-15",
+  "F": {
+    "n": 5,
+    "ages": [
+      24,
+      51
+    ],
+    "hr": 79.7,
+    "rmssd": 28,
+    "sdnn": 124.5,
+    "hrRange": [
+      64.4,
+      84
+    ],
+    "rmssdRange": [
+      22.4,
+      48.9
+    ]
+  },
+  "M": {
+    "n": 4,
+    "ages": [
+      32,
+      55
+    ],
+    "hr": 65.7,
+    "rmssd": 42.4,
+    "sdnn": 163.5,
+    "hrRange": [
+      61.1,
+      71.4
+    ],
+    "rmssdRange": [
+      32.8,
+      46.6
+    ]
+  },
+  "subjects": [
+    {
+      "id": "000",
+      "age": 53,
+      "sex": "M",
+      "hr": 63.6,
+      "rmssd": 46.6,
+      "sdnn": 164.5,
+      "hours": 21.1,
+      "beats": 80441
+    },
+    {
+      "id": "003",
+      "age": 46,
+      "sex": "F",
+      "hr": 84,
+      "rmssd": 26.7,
+      "sdnn": 89.2,
+      "hours": 21.5,
+      "beats": 108115
+    },
+    {
+      "id": "005",
+      "age": 38,
+      "sex": "F",
+      "hr": 79.7,
+      "rmssd": 33.4,
+      "sdnn": 131.2,
+      "hours": 20.5,
+      "beats": 97909
+    },
+    {
+      "id": "006",
+      "age": 32,
+      "sex": "M",
+      "hr": 67.8,
+      "rmssd": 32.8,
+      "sdnn": 164.9,
+      "hours": 22,
+      "beats": 89624
+    },
+    {
+      "id": "007",
+      "age": 51,
+      "sex": "F",
+      "hr": 79.7,
+      "rmssd": 22.4,
+      "sdnn": 109.6,
+      "hours": 12,
+      "beats": 57333
+    },
+    {
+      "id": "008",
+      "age": 39,
+      "sex": "M",
+      "hr": 71.4,
+      "rmssd": 41.5,
+      "sdnn": 160.3,
+      "hours": 22.9,
+      "beats": 98216
+    },
+    {
+      "id": "009",
+      "age": 24,
+      "sex": "F",
+      "hr": 64.4,
+      "rmssd": 48.9,
+      "sdnn": 149,
+      "hours": 17.4,
+      "beats": 67263
+    },
+    {
+      "id": "010",
+      "age": 55,
+      "sex": "M",
+      "hr": 61.1,
+      "rmssd": 43.3,
+      "sdnn": 162.5,
+      "hours": 22.4,
+      "beats": 82080
+    },
+    {
+      "id": "013",
+      "age": 39,
+      "sex": "F",
+      "hr": 81.5,
+      "rmssd": 28,
+      "sdnn": 124.5,
+      "hours": 22.8,
+      "beats": 111521
+    }
+  ]
+}
