@@ -1,8 +1,9 @@
-// Users of the online system (server only).
-// - Source of truth: a JSON file on the Next server (ASTRA_USERS_FILE, default frontend/.data/users.json)
-//   with scrypt password hashes. It is created the first time someone changes their credentials.
-// - Until then, users come from ASTRA_USERS ("user:password:role,…") or the initial admin / admin.
-// - On Vercel the file system is read-only/ephemeral, so changing credentials is disabled there.
+// Users of the online system (server only). Passwords are stored as scrypt hashes, never in plain text.
+// Where the changed credentials are kept, in this order:
+// 1. Redis over REST (Upstash / Vercel KV: KV_REST_API_URL + KV_REST_API_TOKEN, or UPSTASH_REDIS_REST_*):
+//    the option for Vercel, whose disk is wiped on every cold start.
+// 2. A JSON file on the Next server (ASTRA_USERS_FILE, default frontend/.data/users.json): intranet / own server.
+// Until someone changes their credentials, users come from ASTRA_USERS ("user:password:role,…") or admin / admin.
 import { randomBytes, scrypt as scryptCb, timingSafeEqual } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -27,13 +28,28 @@ function envUsers(): EnvUser[] {
   });
 }
 
+/* ---------- Redis over REST (no SDK: two HTTP calls) ---------- */
+const KV_URL = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '').replace(/\/+$/, '');
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+const KV_KEY = 'astra:users';
+const hasKv = () => !!(KV_URL && KV_TOKEN);
+async function kv(cmd: unknown[]): Promise<unknown> {
+  const r = await fetch(KV_URL, { method: 'POST', headers: { Authorization: `Bearer ${KV_TOKEN}`, 'Content-Type': 'application/json' }, body: JSON.stringify(cmd), cache: 'no-store' });
+  if (!r.ok) throw new Error(`kv ${r.status}`);
+  return ((await r.json()) as { result: unknown }).result;
+}
+
+const parse = (raw: unknown) => {
+  if (typeof raw !== 'string') return null;
+  const list = JSON.parse(raw) as StoredUser[];
+  return Array.isArray(list) && list.length ? list : null;
+};
 async function readStore(): Promise<StoredUser[] | null> {
-  try {
-    const list = JSON.parse(await readFile(FILE, 'utf8')) as StoredUser[];
-    return Array.isArray(list) && list.length ? list : null;
-  } catch { return null; }
+  if (hasKv()) return parse(await kv(['GET', KV_KEY])); // a Redis outage fails the login instead of falling back to admin/admin
+  try { return parse(await readFile(FILE, 'utf8')); } catch { return null; }
 }
 async function writeStore(list: StoredUser[]) {
+  if (hasKv()) { await kv(['SET', KV_KEY, JSON.stringify(list)]); return; }
   await mkdir(dirname(FILE), { recursive: true });
   const tmp = `${FILE}.${process.pid}.tmp`; // write then rename: a crash never leaves a half-written file
   await writeFile(tmp, JSON.stringify(list, null, 2), { encoding: 'utf8', mode: 0o600 });
@@ -57,8 +73,8 @@ export async function checkLogin(username: string, password: string): Promise<{ 
   return u && sameStr(u.password, password) ? { username: u.username, role: u.role } : null;
 }
 
-/** credentials can only be changed where the server can keep a file (intranet / own server, not Vercel) */
-export const canChangeCredentials = () => process.env.VERCEL !== '1' && process.env.ASTRA_READONLY_USERS !== '1';
+/** credentials can be changed when there is somewhere durable to keep them: Redis, or a disk that is not Vercel's */
+export const canChangeCredentials = () => process.env.ASTRA_READONLY_USERS !== '1' && (hasKv() || process.env.VERCEL !== '1');
 
 export type ChangeResult = { ok: true; username: string; role: Role } | { ok: false; error: 'readonly' | 'current' | 'taken' | 'invalid' | 'io' };
 

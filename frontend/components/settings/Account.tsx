@@ -66,7 +66,7 @@ export default function Account() {
     <Card title={L('Cuenta', 'Account')} aside={<Badge tone="info">{ROLE[info.role] ? L(...ROLE[info.role]) : info.role}</Badge>}
       lead={L('Cambia tu usuario o tu contraseña. Para confirmar que eres tú, se pide la contraseña actual.', 'Change your username or password. Your current password is required to confirm it is you.')}>
       {!info.writable ? (
-        <p className="inline-msg t-watch">{L('En esta instalación las credenciales las gestiona el administrador del servidor (variable ASTRA_USERS). En la intranet podrás cambiarlas desde aquí.', 'In this deployment credentials are managed by the server administrator (ASTRA_USERS variable). On the intranet you can change them here.')}</p>
+        <p className="inline-msg t-watch">{L('Para cambiar credenciales desde aquí, el servidor necesita dónde guardarlas: en Vercel, conecta una base Redis (Storage → Upstash Redis) y vuelve a desplegar.', 'To change credentials here the server needs somewhere to keep them: on Vercel, connect a Redis database (Storage → Upstash Redis) and redeploy.')}</p>
       ) : (
         <form className="acct-form" onSubmit={submit} noValidate>
           <label className="field">{L('Usuario', 'Username')}
