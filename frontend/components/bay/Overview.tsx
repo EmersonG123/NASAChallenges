@@ -14,10 +14,9 @@ const Icon = ({ d, size = 14 }: { d: string; size?: number }) => (
 export function BayHeader({ view }: { view: BayView }) {
   const { L } = useBayText();
   const TITLES: Record<BayView, [string, string, string, string]> = {
-    resumen: ['Bahía médica', 'Medical bay', 'Estado de cada persona frente a su propio promedio antes del vuelo.', "Each person's state versus their own pre-flight average."],
-    alertas: ['Alertas y Copilot', 'Alerts & Copilot', 'Qué cambió, por qué importa y qué hacer. Pregunta en lenguaje normal.', 'What changed, why it matters and what to do. Ask in plain language.'],
-    tripulacion: ['Tripulación', 'Crew', 'Toda la tripulación de un vistazo y el clima espacial de la misión.', 'The whole crew at a glance and the space weather of the mission.'],
-    fatiga: ['Fatiga y estrés', 'Fatigue & stress', 'Monitoreo con la cámara durante el turno; cada sesión queda registrada.', 'Camera monitoring during the shift; every session is recorded.'],
+    resumen: ['Salud de la tripulación', 'Crew health', 'Estado de cada persona frente a su propio promedio antes del vuelo.', "Each person's state versus their own pre-flight average."],
+    alertas: ['Alertas y asistente', 'Alerts & assistant', 'Qué cambió, por qué importa y qué hacer. Pregunta en lenguaje normal.', 'What changed, why it matters and what to do. Ask in plain language.'],
+    tripulacion: ['Comparar tripulación', 'Compare crew', 'Toda la tripulación de un vistazo y el clima espacial de la misión.', 'The whole crew at a glance and the space weather of the mission.'],
     simulador: ['Simulador', 'Simulator', 'Explora escenarios de misión. Son proyecciones, no datos reales.', 'Explore mission scenarios. These are projections, not real data.'],
   };
   const [tEs, tEn, sEs, sEn] = TITLES[view];

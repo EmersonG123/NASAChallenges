@@ -99,9 +99,9 @@ function WellbeingInner() {
   };
   const missing = remind && !!today && !data.days.some((d) => d.day === today && d.c);
   const TITLES = {
-    hoy: [L('Bienestar y sueño', 'Wellbeing & sleep'), L('Salud conductual y recuperación, día a día, frente a la propia base de cada persona.', "Behavioural health and recovery, day by day, against each person's own baseline.")],
+    hoy: [L('Sueño y bienestar', 'Sleep & wellbeing'), L('Salud conductual y recuperación, día a día, frente a la propia base de cada persona.', "Behavioural health and recovery, day by day, against each person's own baseline.")],
     tendencias: [L('Tendencias', 'Trends'), L('La evolución de cada métrica; la línea discontinua es su base personal.', 'How each metric evolves; the dashed line is the personal baseline.')],
-    wearable: [L('Wearable', 'Wearable'), L('Pulso, variabilidad cardiaca, sueño y oxígeno desde un dispositivo vestible.', 'Pulse, heart rate variability, sleep and oxygen from a wearable device.')],
+    wearable: [L('Importar wearable', 'Import wearable'), L('Pulso, variabilidad cardiaca, sueño y oxígeno desde un dispositivo vestible.', 'Pulse, heart rate variability, sleep and oxygen from a wearable device.')],
   } as const;
   return (
     <div className="page">

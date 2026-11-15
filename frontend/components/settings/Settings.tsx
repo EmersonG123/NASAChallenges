@@ -76,7 +76,7 @@ export default function Settings() {
         </Card>
 
         <Card title={L('Monitoreo', 'Monitoring')}>
-          <Row label={L('Recordatorio del registro diario', 'Daily check-in reminder')} hint={L('Aviso en «Bienestar y sueño» si hoy aún no hay registro.', 'Notice in “Wellbeing & sleep” when there is no check-in yet today.')}>
+          <Row label={L('Recordatorio del registro diario', 'Daily check-in reminder')} hint={L('Aviso en «Sueño y bienestar» si hoy aún no hay registro.', 'Notice in “Sleep & wellbeing” when there is no check-in yet today.')}>
             <button type="button" className={`switch${remind ? ' on' : ''}`} role="switch" aria-checked={remind} onClick={() => setRemind(!remind)}><i /></button>
           </Row>
           <Row label={L('Cámara', 'Camera')} hint={L('Las imágenes de ASTRA Vision se analizan en este equipo y nunca se envían ni se guardan.', 'ASTRA Vision images are analysed on this device and are never sent or stored.')}>

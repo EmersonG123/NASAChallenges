@@ -39,8 +39,8 @@ export default function Sessions() {
       lead={L('Cada sesión de ASTRA Vision se guarda en la base de datos local, también sin internet, y se sube al sistema online cuando hay conexión.',
         'Every ASTRA Vision session is saved in the local database, also offline, and uploaded to the online system when there is a connection.')}>
       {!shown.length ? (
-        <p className="empty-state">{L('Todavía no hay sesiones. Activa la cámara, analiza un video o mira la simulación en «Fatiga y estrés»; al detenerla se guarda aquí.',
-          'No sessions yet. Turn on the camera, analyze a video or watch the simulation in “Fatigue & stress”; when it stops it is saved here.')}</p>
+        <p className="empty-state">{L('Todavía no hay sesiones. Activa la cámara, analiza un video o mira la simulación arriba; al detenerla se guarda aquí.',
+          'No sessions yet. Turn on the camera, analyze a video or watch the simulation above; when it stops it is saved here.')}</p>
       ) : (
         <div className="tablewrap">
           <table className="kv">

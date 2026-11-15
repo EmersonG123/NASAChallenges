@@ -31,15 +31,15 @@ const count = (study: string) => labRows(study).length;
 /** official resources of the challenge and how each one is used */
 const HRP_RES: [[string, string], [string, string], string][] = [
   [['5 peligros del vuelo espacial (NASA HRP)', '5 Hazards of Human Spaceflight (NASA HRP)'],
-    ['Radiación (clima espacial y dosis), aislamiento y confinamiento (Bienestar y sueño), distancia a la Tierra (app sin conexión), gravedad alterada (sangre, corazón, riñón) y ambiente cerrado (CO₂, oxígeno).',
-      'Radiation (space weather and dose), isolation & confinement (Wellbeing & sleep), distance from Earth (offline app), altered gravity (blood, heart, kidney) and closed environment (CO₂, oxygen).'], 'https://www.nasa.gov/hrp/hazards'],
+    ['Radiación (clima espacial y dosis), aislamiento y confinamiento (Sueño y bienestar), distancia a la Tierra (app sin conexión), gravedad alterada (sangre, corazón, riñón) y ambiente cerrado (CO₂, oxígeno).',
+      'Radiation (space weather and dose), isolation & confinement (Sleep & wellbeep), distance from Earth (offline app), altered gravity (blood, heart, kidney) and closed environment (CO₂, oxygen).'], 'https://www.nasa.gov/hrp/hazards'],
   [['Riesgos del vuelo espacial (NASA HRP)', 'Risks of Human Spaceflight (NASA HRP)'],
     ['Cada alerta indica el riesgo HRP al que se refiere: inmune, cardiovascular, cálculos renales, sueño y sobrecarga, conducta y cognición, síndrome neuro-ocular.',
       'Every alert names the HRP risk it relates to: immune, cardiovascular, renal stones, sleep and overload, behaviour and cognition, neuro-ocular syndrome.'], 'https://humanresearchroadmap.nasa.gov/risks/'],
   [['Investigación HRP en curso', 'Ongoing HRP research in space'],
     ['Respaldo de umbrales y acciones, junto con los informes técnicos de NTRS.', 'Backs thresholds and actions, together with the NTRS technical reports.'], 'https://www.nasa.gov/hrp/'],
   [['CSA: monitoreo de radiación para la salud', 'CSA: monitoring radiation for astronaut health'],
-    ['Módulo Fisiología y radiación: dosis diaria y acumulada y eventos de partículas solares que disparan alertas.', 'Physiology & radiation module: daily and cumulative dose and solar particle events that trigger alerts.'], 'https://www.asc-csa.gc.ca/eng/'],
+    ['Módulo Radiación y signos vitales: dosis diaria y acumulada y eventos de partículas solares que disparan alertas.', 'Radiation & vitals module: daily and cumulative dose and solar particle events that trigger alerts.'], 'https://www.asc-csa.gc.ca/eng/'],
   [['CSA: por qué hacemos ciencia en el espacio', 'CSA: why we do science in space'],
     ['Del espacio a la Tierra: el mismo método protege a mineros de altura en Ayacucho y a trabajadores por turnos.', 'From space to Earth: the same method protects high-altitude miners in Ayacucho and shift workers.'], 'https://www.asc-csa.gc.ca/eng/'],
 ];
@@ -69,13 +69,13 @@ export default function Resources() {
     {
       id: 'donki26', title: 'NASA DONKI · ' + L('ene–feb 2026', 'Jan–Feb 2026'), what: L('Partículas solares (SEP), eyecciones de masa coronal y tormentas geomagnéticas (Kp) que impulsan el escenario de 30 días.', 'Solar particle events, coronal mass ejections and geomagnetic storms (Kp) that drive the 30-day scenario.'),
       records: M.donki.sep.length + M.donki.cme.length + M.donki.kp.length, unit: L('eventos', 'events'), period: L('ene – feb 2026', 'Jan – Feb 2026'),
-      used: L('Fisiología y radiación', 'Physiology & radiation'), href: 'https://ccmc.gsfc.nasa.gov/tools/DONKI/',
+      used: L('Radiación y signos vitales', 'Radiation & vitals'), href: 'https://ccmc.gsfc.nasa.gov/tools/DONKI/',
       dl: () => downloadCsv('astra-donki-2026.csv', ['type', 'time_utc', 'value'], [...M.donki.sep.map((e) => ['SEP', e.t, '']), ...M.donki.cme.map((e) => ['CME', e.t, e.v]), ...M.donki.kp.map((e) => ['GST_Kp', e.t, e.v])]),
     },
     {
       id: 'rad', title: 'NASA PDS · Curiosity RAD', what: L('Dosis de radiación medida por el rover Curiosity en la superficie de Marte (detector equivalente a tejido).', 'Radiation dose measured by the Curiosity rover on the surface of Mars (tissue-equivalent detector).'),
       records: M.rad.series.length, unit: L('lecturas', 'readings'), period: `${M.rad.series[0].t.slice(0, 10)} – ${M.rad.series[M.rad.series.length - 1].t.slice(0, 10)}`,
-      used: L('Fisiología y radiación', 'Physiology & radiation'), href: 'https://pds-ppi.igpp.ucla.edu/',
+      used: L('Radiación y signos vitales', 'Radiation & vitals'), href: 'https://pds-ppi.igpp.ucla.edu/',
       dl: () => downloadCsv('astra-curiosity-rad.csv', ['time_utc', 'sol', 'dose_rate_E_uGy_h', 'dose_rate_B_uGy_h'], M.rad.series.map((r) => [r.t, r.sol, r.e, r.b])),
     },
     {
@@ -120,7 +120,7 @@ export default function Resources() {
     <div className="page">
       <header className="page-head">
         <div>
-          <h1>{L('Datos y recursos', 'Data & resources')}</h1>
+          <h1>{L('Datos NASA', 'NASA data')}</h1>
           <p>{L('Las fuentes reales de la NASA con las que trabaja ASTRA. Cada conjunto se puede consultar en su origen y descargar en CSV.', 'The real NASA sources ASTRA works with. Every dataset links to its origin and can be downloaded as CSV.')}</p>
         </div>
       </header>

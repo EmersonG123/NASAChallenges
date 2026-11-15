@@ -16,7 +16,7 @@ const ms = (s: string) => Date.parse(s.endsWith('Z') ? s : s + 'Z');
 
 const TX = {
   en: {
-    eyebrow: 'Module 2 · Physiological & radiation monitoring',
+    eyebrow: 'Radiation & vitals',
     title: 'Space weather, radiation dose and crew vitals on one timeline',
     lede: 'Real NASA space weather (DONKI) drives a 30-day mission scenario (Jan 1–30, 2026), next to real radiation measured by the Curiosity rover and real microgravity-analog biotelemetry. When a real solar particle event hits, ASTRA tracks how dose, heart rate, sleep and stress respond, and raises an explained alert.',
     tags: [['real', 'REAL', 'measured by NASA'], ['derived', 'DERIVED', 'calculated from real data'], ['sim', 'SYNTHETIC', 'calibrated scenario, not crew data']],
@@ -41,7 +41,7 @@ const TX = {
     ofDays: 'of 30 days',
   },
   es: {
-    eyebrow: 'Módulo 2 · Monitoreo fisiológico y radiación',
+    eyebrow: 'Radiación y signos vitales',
     title: 'Clima espacial, dosis de radiación y signos vitales en una línea de tiempo',
     lede: 'El clima espacial real de la NASA (DONKI) impulsa un escenario de misión de 30 días (1–30 ene 2026), junto a la radiación real medida por el rover Curiosity y la biotelemetría real de un análogo de microgravedad. Cuando llega un evento real de partículas solares, ASTRA sigue cómo responden la dosis, la frecuencia cardiaca, el sueño y el estrés, y emite una alerta explicada.',
     tags: [['real', 'REAL', 'medido por la NASA'], ['derived', 'DERIVADO', 'calculado con datos reales'], ['sim', 'SINTÉTICO', 'escenario calibrado, no datos de tripulación']],

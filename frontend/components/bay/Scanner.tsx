@@ -1,5 +1,6 @@
 'use client';
 // Body scanner: the X-ray twin with one hotspot per body system, coloured by this person's score.
+import { useRouter } from 'next/navigation';
 import { useState, type KeyboardEvent } from 'react';
 import XrayFigure from '@/components/twin/XrayFigure';
 import { Card, toneOf } from '@/components/app/ui';
@@ -11,11 +12,11 @@ export default function Scanner() {
   const { crew, tp, sys, setSys, vision } = useBay();
   const { L, crewLabel, tpName } = useBayText();
   const [all, setAll] = useState(false);
+  const router = useRouter();
 
   const open = (k: string) => {
-    // same-page hash change: views listen to hashchange, which the Next router does not emit
-    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
-    if (k === 'cerebro') { window.location.assign('#fatiga'); return; }
+    // the brain opens the camera module (fatigue & stress)
+    if (k === 'cerebro') { router.push('/system/fatigue'); return; }
     setSys(k);
   };
   const key = (k: string) => (e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(k); } };

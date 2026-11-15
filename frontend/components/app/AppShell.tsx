@@ -17,24 +17,28 @@ import './dashboard.css';
 type Item = [href: string, es: string, en: string, icon: string];
 
 const MODULES: Item[] = [
-  ['/system', 'Bahía médica', 'Medical bay', 'M4 21V8l8-5 8 5v13M9 21v-6h6v6'],
-  ['/system/wellbeing', 'Bienestar y sueño', 'Wellbeing & sleep', 'M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z'],
-  ['/system/monitor', 'Fisiología y radiación', 'Physiology & radiation', 'M3 12h4l3-8 4 16 3-8h4'],
-  ['/system/resources', 'Datos y recursos', 'Data & resources', 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3'],
+  ['/system', 'Salud de la tripulación', 'Crew health', 'M4 21V8l8-5 8 5v13M9 21v-6h6v6'],
+  ['/system/fatigue', 'Fatiga y estrés', 'Fatigue & stress', 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z'],
+  ['/system/wellbeing', 'Sueño y bienestar', 'Sleep & wellbeing', 'M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z'],
+  ['/system/monitor', 'Radiación y signos vitales', 'Radiation & vitals', 'M3 12h4l3-8 4 16 3-8h4'],
+  ['/system/resources', 'Datos NASA', 'NASA data', 'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3'],
 ];
 /** views of a module (selected by hash) or anchors inside a long page */
 const SECTIONS: Record<string, { label: [string, string]; views: boolean; items: Item[] }> = {
   '/system': { label: ['Vistas', 'Views'], views: true, items: [
     ['#resumen', 'Resumen', 'Overview', 'M12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM6 21v-5a6 6 0 0 1 12 0v5'],
-    ['#alertas', 'Alertas y Copilot', 'Alerts & Copilot', 'M12 3l9 16H3zM12 10v4M12 17v.5'],
-    ['#tripulacion', 'Tripulación', 'Crew', 'M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 11a3 3 0 1 0 0-6M2 20a6 6 0 0 1 12 0M14 14a6 6 0 0 1 8 6'],
-    ['#fatiga', 'Fatiga y estrés', 'Fatigue & stress', 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z'],
+    ['#alertas', 'Alertas y asistente', 'Alerts & assistant', 'M12 3l9 16H3zM12 10v4M12 17v.5'],
+    ['#tripulacion', 'Comparar tripulación', 'Compare crew', 'M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 11a3 3 0 1 0 0-6M2 20a6 6 0 0 1 12 0M14 14a6 6 0 0 1 8 6'],
     ['#simulador', 'Simulador', 'Simulator', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
   ] },
+  '/system/fatigue': { label: ['En esta página', 'On this page'], views: false, items: [
+    ['#vision', 'Monitor de cámara', 'Camera monitor', 'M3 7h3l2-3h8l2 3h3v13H3zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'],
+    ['#historial', 'Historial de sesiones', 'Session history', 'M12 8v4l3 2M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5'],
+  ] },
   '/system/wellbeing': { label: ['Vistas', 'Views'], views: true, items: [
-    ['#hoy', 'Registro de hoy', 'Today', 'M5 5h14v15H5zM8 3v4M16 3v4M5 10h14M9 14l2 2 4-4'],
+    ['#hoy', 'Registro de hoy', "Today's check-in", 'M5 5h14v15H5zM8 3v4M16 3v4M5 10h14M9 14l2 2 4-4'],
     ['#tendencias', 'Tendencias', 'Trends', 'M3 17l6-6 4 4 8-8M15 7h6v6'],
-    ['#wearable', 'Wearable', 'Wearable', 'M8 4h8l1 4v8l-1 4H8l-1-4V8zM12 9v3l2 1'],
+    ['#wearable', 'Importar wearable', 'Import wearable', 'M8 4h8l1 4v8l-1 4H8l-1-4V8zM12 9v3l2 1'],
   ] },
   '/system/monitor': { label: ['En esta página', 'On this page'], views: false, items: [
     ['#weather', 'Clima espacial', 'Space weather', 'M12 4v2M12 18v2M4 12h2M18 12h2M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'],

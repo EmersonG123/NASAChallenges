@@ -69,7 +69,7 @@ export default function Status() {
             if (n.k === 'sueno' && vision) {
               const v = Math.max(vision.fatigue, vision.stress); const tone = toneOf(lvlOfScore(v));
               return (
-                <a key={n.k} className="sys" href="#fatiga" title={`ASTRA Vision (${vision.src})`}>
+                <a key={n.k} className="sys" href="/system/fatigue" title={`ASTRA Vision (${vision.src})`}>
                   <span className="nm"><Dot tone={tone} />{L('Fatiga y estrés', 'Fatigue & stress')}</span><Meter value={v} tone={tone} /><span className="sc">{v}</span>
                 </a>
               );
