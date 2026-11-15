@@ -6,10 +6,13 @@ import ThemeIcon from '@/components/site/ThemeIcon';
 import { usePrefs } from '@/lib/prefs';
 import '@/components/app/dashboard.css';
 
+/** demo access for the judges: the form comes pre-filled, they only press "Sign in" */
+const DEMO = { username: 'admin', password: 'admin' };
+
 export default function LoginForm() {
   const { L, lang, theme, toggleLang, toggleTheme } = usePrefs();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(DEMO.username);
+  const [password, setPassword] = useState(DEMO.password);
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<'bad' | 'net' | null>(null);
@@ -36,9 +39,14 @@ export default function LoginForm() {
         <div className="auth-brand"><Logo href="/" size={34} /></div>
         <h1>{L('Iniciar sesión', 'Sign in')}</h1>
         <p className="auth-lead">{L('Acceso al sistema de salud de la tripulación.', 'Access to the crew health system.')}</p>
+        <div className="auth-demo">
+          <b>{L('Acceso de demostración', 'Demo access')}</b>
+          <span>{L('Usuario', 'Username')} <code>{DEMO.username}</code> · {L('Contraseña', 'Password')} <code>{DEMO.password}</code></span>
+          <small>{L('Ya está rellenado: solo pulsa «Entrar».', 'Already filled in: just press “Sign in”.')}</small>
+        </div>
         <form onSubmit={submit} className="auth-form" noValidate>
           <label className="field">{L('Usuario', 'Username')}
-            <input type="text" name="username" autoComplete="username" autoCapitalize="none" spellCheck={false} required autoFocus
+            <input type="text" name="username" autoComplete="username" autoCapitalize="none" spellCheck={false} required
               value={username} onChange={(e) => { setUsername(e.target.value); setError(null); }} />
           </label>
           <label className="field">{L('Contraseña', 'Password')}
@@ -57,7 +65,7 @@ export default function LoginForm() {
               {error === 'bad' ? L('Usuario o contraseña incorrectos.', 'Wrong username or password.') : L('No se pudo conectar con el servidor. Inténtalo de nuevo.', 'Could not reach the server. Try again.')}
             </p>
           )}
-          <button type="submit" className="btn-d primary auth-submit" disabled={busy || !username || !password}>{busy ? L('Entrando…', 'Signing in…') : L('Entrar', 'Sign in')}</button>
+          <button type="submit" autoFocus className="btn-d primary auth-submit" disabled={busy || !username || !password}>{busy ? L('Entrando…', 'Signing in…') : L('Entrar', 'Sign in')}</button>
         </form>
         <p className="note auth-foot">{L('La aplicación de escritorio funciona sin conexión y no pide inicio de sesión.', 'The desktop app works offline and does not ask you to sign in.')}</p>
       </main>

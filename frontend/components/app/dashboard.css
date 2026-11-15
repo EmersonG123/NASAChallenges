@@ -736,3 +736,8 @@
 .acct-form .inline-msg { margin: 0; }
 .acct-actions { display: flex; justify-content: flex-end; padding-top: 4px; }
 @media (max-width: 600px) { .acct-two { grid-template-columns: minmax(0, 1fr); } .acct-actions .btn-d { width: 100%; } }
+.auth-demo { display: flex; flex-direction: column; gap: 2px; margin: -6px 0 18px; padding: 10px 12px; border: 1px dashed var(--primary); border-radius: 10px; background: var(--primary-soft); }
+.auth-demo b { font-size: 13px; color: var(--primary); }
+.auth-demo span { font-size: 14px; }
+.auth-demo code { padding: 1px 6px; border-radius: 6px; background: var(--surface); font: 600 13px var(--f-mono); color: var(--text); }
+.auth-demo small { font-size: 12px; color: var(--muted); }
