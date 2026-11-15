@@ -1,0 +1,138 @@
+{
+  "solar_storm_sdo": [
+    {
+      "nasa_id": "GSFC_20171208_Archive_e000878",
+      "title": "Sun Emits a Mid-Level Flare on Dec. 4, 2014",
+      "date_created": "2017-12-08",
+      "center": "GSFC",
+      "description": "The sun emitted a solar flare on Dec. 4, 2014, seen as the flash of light in this image from NASA's Solar Dynamics Observatory. The image blends two wavelengths of extreme ultraviolet light – 131 and 171 Angstroms – which are typically colored in teal and gold, respectively. Read more: <a href=\"http",
+      "image_url": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000878/GSFC_20171208_Archive_e000878~small.jpg"
+    },
+    {
+      "nasa_id": "PIA18167",
+      "title": "Magnificent Outburst",
+      "date_created": "2012-08-31",
+      "center": "JPL",
+      "description": "Sparked by a medium-sized (C-class) flare, a long, magnetic filament burst out from the Sun, producing one of the best shows that the Solar Dynamics Observatory (SDO) has seen (Aug. 31, 2012). Viewed in the 304 Angstrom wavelength of extreme ultraviolet light, the filament strand gets stretched outw",
+      "image_url": "https://images-assets.nasa.gov/image/PIA18167/PIA18167~small.jpg"
+    },
+    {
+      "nasa_id": "PIA19821",
+      "title": "NuSTAR Stares at the Sun",
+      "date_created": "2015-07-08",
+      "center": "JPL",
+      "description": "Flaring, active regions of our sun are highlighted in this image combining observations from several telescopes. High-energy X-rays from NASA's Nuclear Spectroscopic Telescope Array (NuSTAR) are shown in blue; low-energy X-rays from Japan's Hinode spacecraft are green; and extreme ultraviolet light ",
+      "image_url": "https://images-assets.nasa.gov/image/PIA19821/PIA19821~medium.jpg"
+    },
+    {
+      "nasa_id": "GSFC_20171208_Archive_e000920",
+      "title": "Giant Sunspot Erupts on October 24, 2014",
+      "date_created": "2017-12-08",
+      "center": "GSFC",
+      "description": "Active region AR 12192 on the sun erupted with a strong flare on Oct. 24, 2014, as seen in the bright light of this image captured by NASA's Solar Dynamics Observatory. This image shows extreme ultraviolet light that highlights the hot solar material in the sun's atmosphere.  Credit: NASA/GSFC/SDO  ",
+      "image_url": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000920/GSFC_20171208_Archive_e000920~medium.jpg"
+    }
+  ],
+  "iss_astronaut_health": [
+    {
+      "nasa_id": "iss071e414062",
+      "title": "NASA astronaut Mike Barratt collects and organizes medical supplies",
+      "date_created": "2024-08-03",
+      "center": "JSC",
+      "description": "iss071e414062 (Aug. 3, 2024) --- NASA astronaut and Expedition 71 Flight Engineer Mike Barratt collects and organizes medical supplies aboard the International Space Station's Harmony module.",
+      "image_url": "https://images-assets.nasa.gov/image/iss071e414062/iss071e414062~medium.jpg"
+    },
+    {
+      "nasa_id": "jsc2025e070062",
+      "title": "NASA astronauts Jack Hathaway and Jessica Meir participate in a medical emergency training session",
+      "date_created": "2025-08-21",
+      "center": "JSC",
+      "description": "jsc2025e070062 (Aug. 21, 2025) --- NASA's SpaceX Crew-12 members Jack Hathaway and Jessica Meir, both NASA astronauts, participate in a medical emergency training session at NASA's Johnson Space Center in Houston, Texas, for their mission to the International Space Station. Credit: NASA/Bill Staffor",
+      "image_url": "https://images-assets.nasa.gov/image/jsc2025e070062/jsc2025e070062~large.jpg"
+    },
+    {
+      "nasa_id": "jsc2025e070056",
+      "title": "NASA astronaut Jack Hathaway reviews cardiopulmonary resuscitation (CPR) techniques",
+      "date_created": "2025-08-21",
+      "center": "JSC",
+      "description": "jsc2025e070056 (Aug. 21, 2025) --- NASA astronaut Jack Hathaway reviews cardiopulmonary resuscitation (CPR) techniques during a medical emergency simulation as part of his training for NASA's SpaceX Crew-12 mission to the International Space Station. Surrounding Hathaway are various training support",
+      "image_url": "https://images-assets.nasa.gov/image/jsc2025e070056/jsc2025e070056~large.jpg"
+    },
+    {
+      "nasa_id": "jsc2025e070047",
+      "title": "NASA astronaut Jessica Meir practices cardiopulmonary resuscitation (CPR)",
+      "date_created": "2025-08-21",
+      "center": "JSC",
+      "description": "jsc2025e070047 (Aug. 21, 2025) --- NASA astronaut Jessica Meir practices cardiopulmonary resuscitation (CPR) during a medical emergency simulation as part of her training for NASA's SpaceX Crew-12 mission to the International Space Station. Surrounding Meir are various training support personnel at ",
+      "image_url": "https://images-assets.nasa.gov/image/jsc2025e070047/jsc2025e070047~large.jpg"
+    }
+  ],
+  "space_radiation": [
+    {
+      "nasa_id": "iss032e016946",
+      "title": "Hoshide with HiMassSee kits",
+      "date_created": "2012-08-11",
+      "center": "JSC",
+      "description": "iss032e016946 (8/11/2012) --- Japan Aerospace Exploration Agency (JAXA) astronaut Akihiko Hoshide poses with the HiMassSEE (Spacecraft Single Event Environments at High Shielding Mass) kits 1,2,3 and 4 in the U.S. Lab aboard the International Space Station (ISS). Spacecraft Single Event Environments",
+      "image_url": "https://images-assets.nasa.gov/image/iss032e016946/iss032e016946~medium.jpg"
+    },
+    {
+      "nasa_id": "iss027e017249",
+      "title": "Nespoli installs ALTEA-SHIELD Hardware in the US Laboratory",
+      "date_created": "2011-04-23",
+      "center": "JSC",
+      "description": "ISS027-E-017249 (23 April 2011) --- European Space Agency astronaut Paolo Nespoli, Expedition 27 flight engineer, works with Anomalous Long Term Effects on Astronauts (ALTEA) Shield isotropic equipment in the Destiny laboratory of the International Space Station. ALTEA-Shield isotropic dosimetry use",
+      "image_url": "https://images-assets.nasa.gov/image/iss027e017249/iss027e017249~medium.jpg"
+    },
+    {
+      "nasa_id": "iss027e017243",
+      "title": "Nespoli works with ALTEA-SHIELD Hardware in the US Laboratory",
+      "date_created": "2011-04-23",
+      "center": "JSC",
+      "description": "ISS027-E-017243 (23 April 2011) --- European Space Agency astronaut Paolo Nespoli, Expedition 27 flight engineer, works with Anomalous Long Term Effects on Astronauts (ALTEA) Shield isotropic equipment in the Destiny laboratory of the International Space Station. ALTEA-Shield isotropic dosimetry use",
+      "image_url": "https://images-assets.nasa.gov/image/iss027e017243/iss027e017243~medium.jpg"
+    },
+    {
+      "nasa_id": "iss027e017237",
+      "title": "Nespoli photographs ALTEA-SHIELD Hardware in the US Laboratory",
+      "date_created": "2011-04-23",
+      "center": "JSC",
+      "description": "ISS027-E-017237 (23 April 2011) --- European Space Agency astronaut Paolo Nespoli, Expedition 27 flight engineer, works with Anomalous Long Term Effects on Astronauts (ALTEA) Shield isotropic equipment in the Destiny laboratory of the International Space Station. ALTEA-Shield isotropic dosimetry use",
+      "image_url": "https://images-assets.nasa.gov/image/iss027e017237/iss027e017237~medium.jpg"
+    }
+  ],
+  "curiosity_mars_rad": [
+    {
+      "nasa_id": "PIA15991",
+      "title": "Curiosity Color Close-Up upon Landing",
+      "date_created": "2012-08-07",
+      "center": "JPL",
+      "description": "This color thumbnail image was obtained by NASA Curiosity rover and is representative of the images acquired once the Curiosity rover was resting on the surface of Mars after touchdown.",
+      "image_url": "https://images-assets.nasa.gov/image/PIA15991/PIA15991~thumb.jpg"
+    },
+    {
+      "nasa_id": "PIA15979",
+      "title": "Curiosity Spotted on Parachute by Orbiter",
+      "date_created": "2012-08-06",
+      "center": "JPL",
+      "description": "NASA Curiosity rover and its parachute were spotted by NASA Mars Reconnaissance Orbiter as Curiosity descended to the surface. The HiRISE camera captured this image of Curiosity while the orbiter was listening to transmissions from the rover.",
+      "image_url": "https://images-assets.nasa.gov/image/PIA15979/PIA15979~thumb.jpg"
+    },
+    {
+      "nasa_id": "PIA14838",
+      "title": "Curiosity and Descent Stage, Artist Concept",
+      "date_created": "2011-10-03",
+      "center": "JPL",
+      "description": "This is an artist concept of the rover and descent stage for NASA Mars Science Laboratory spacecraft during the final minute before the rover, Curiosity, touches down on the surface of Mars.",
+      "image_url": "https://images-assets.nasa.gov/image/PIA14838/PIA14838~medium.jpg"
+    },
+    {
+      "nasa_id": "PIA15998",
+      "title": "Evidence of a Job Well Done",
+      "date_created": "2012-08-07",
+      "center": "JPL",
+      "description": "This close-up view shows the rover Curiosity parachute and back shell strewn across the surface of Mars. The image was captured by NASA Mars Reconnaissance Orbiter about 24 hours after the parachute helped guide the rover to the surface.",
+      "image_url": "https://images-assets.nasa.gov/image/PIA15998/PIA15998~small.jpg"
+    }
+  ]
+}

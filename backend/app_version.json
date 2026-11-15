@@ -1,0 +1,5 @@
+{
+  "version": "1.0.0",
+  "url": "/downloads/ASTRA-Health-Setup.exe",
+  "notes": "Primera versión de escritorio: monitoreo sin conexión con base de datos SQLite local y sincronización con el sistema online."
+}

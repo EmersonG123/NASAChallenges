@@ -1,0 +1,26 @@
+# secretos
+.env
+.env.*
+**/.env
+**/.env.*
+
+# dependencias y builds
+node_modules/
+.next/
+out/
+dist/
+desktop/app/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+
+# bases de datos locales de sincronización
+backend/data/
+*.db
+
+# archivos de más de 100 MB (límite de GitHub)
+frontend/public/downloads/*.exe
+backend/pipeline/data/raw/RAD_RDR_*.TXT
+
+.DS_Store
+Thumbs.db

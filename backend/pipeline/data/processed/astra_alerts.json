@@ -1,0 +1,80 @@
+[
+  {
+    "mission_day": 18,
+    "date": "2026-01-18",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (87.8 bpm, z=+6.2)",
+      "Sueño reducido (5.49 h, z=-7.4)",
+      "Pico de radiación diaria (1.812 mGy)"
+    ],
+    "explanation": "Día 18 (2026-01-18): Incremento sinérgico de factores de riesgo -> FC elevada (87.8 bpm, z=+6.2); Sueño reducido (5.49 h, z=-7.4); Pico de radiación diaria (1.812 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  },
+  {
+    "mission_day": 19,
+    "date": "2026-01-19",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (85.5 bpm, z=+5.3)",
+      "Sueño reducido (5.05 h, z=-9.1)",
+      "Pico de radiación diaria (2.083 mGy)"
+    ],
+    "explanation": "Día 19 (2026-01-19): Incremento sinérgico de factores de riesgo -> FC elevada (85.5 bpm, z=+5.3); Sueño reducido (5.05 h, z=-9.1); Pico de radiación diaria (2.083 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  },
+  {
+    "mission_day": 20,
+    "date": "2026-01-20",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (86.9 bpm, z=+5.9)",
+      "Sueño reducido (6.08 h, z=-5.1)",
+      "Pico de radiación diaria (1.161 mGy)"
+    ],
+    "explanation": "Día 20 (2026-01-20): Incremento sinérgico de factores de riesgo -> FC elevada (86.9 bpm, z=+5.9); Sueño reducido (6.08 h, z=-5.1); Pico de radiación diaria (1.161 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  },
+  {
+    "mission_day": 21,
+    "date": "2026-01-21",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (86.8 bpm, z=+5.8)",
+      "Sueño reducido (5.01 h, z=-9.2)",
+      "Pico de radiación diaria (2.098 mGy)"
+    ],
+    "explanation": "Día 21 (2026-01-21): Incremento sinérgico de factores de riesgo -> FC elevada (86.8 bpm, z=+5.8); Sueño reducido (5.01 h, z=-9.2); Pico de radiación diaria (2.098 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  },
+  {
+    "mission_day": 22,
+    "date": "2026-01-22",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (90.6 bpm, z=+7.3)",
+      "Sueño reducido (4.57 h, z=-10.9)",
+      "Pico de radiación diaria (0.943 mGy)"
+    ],
+    "explanation": "Día 22 (2026-01-22): Incremento sinérgico de factores de riesgo -> FC elevada (90.6 bpm, z=+7.3); Sueño reducido (4.57 h, z=-10.9); Pico de radiación diaria (0.943 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  },
+  {
+    "mission_day": 23,
+    "date": "2026-01-23",
+    "level": "CRITICA",
+    "triggers": [
+      "FC elevada (88.2 bpm, z=+6.4)",
+      "Sueño reducido (5.4 h, z=-7.7)",
+      "Pico de radiación diaria (0.917 mGy)"
+    ],
+    "explanation": "Día 23 (2026-01-23): Incremento sinérgico de factores de riesgo -> FC elevada (88.2 bpm, z=+6.4); Sueño reducido (5.4 h, z=-7.7); Pico de radiación diaria (0.917 mGy)",
+    "recommendation": "Chequeo médico remoto, reducir carga física en EVA/ejercicio, priorizar protocolo de descanso y verificar blindaje ante evento SEP.",
+    "ntrs_reference": "https://ntrs.nasa.gov/citations/20040089526"
+  }
+]

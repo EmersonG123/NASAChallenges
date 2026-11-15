@@ -1,0 +1,146 @@
+[
+  {
+    "identifier": "20261112000830",
+    "timestamp_utc": "2026-11-12T00:03:42Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.564941,
+    "centroid_lon": 164.919434,
+    "dscovr_j2000_km": {
+      "x": -1128365.394727,
+      "y": -871346.056251,
+      "z": -288296.578126
+    },
+    "lunar_j2000_km": {
+      "x": -73249.538351,
+      "y": -350718.454825,
+      "z": -187053.971517
+    },
+    "sun_j2000_km": {
+      "x": -96691655.199844,
+      "y": -102929376.80012,
+      "z": -44617550.125506
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112000830.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112000830.jpg"
+  },
+  {
+    "identifier": "20261112015633",
+    "timestamp_utc": "2026-11-12T01:51:44Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.601562,
+    "centroid_lon": 137.900391,
+    "dscovr_j2000_km": {
+      "x": -1126694.633334,
+      "y": -872608.006699,
+      "z": -289292.322916
+    },
+    "lunar_j2000_km": {
+      "x": -67057.161422,
+      "y": -351935.48782,
+      "z": -187340.752463
+    },
+    "sun_j2000_km": {
+      "x": -96542105.6387,
+      "y": -103044300.266623,
+      "z": -44667365.437159
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112015633.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112015633.jpg"
+  },
+  {
+    "identifier": "20261112034436",
+    "timestamp_utc": "2026-11-12T03:39:47Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.66748,
+    "centroid_lon": 110.874023,
+    "dscovr_j2000_km": {
+      "x": -1125019.983333,
+      "y": -873867.915753,
+      "z": -290287.814529
+    },
+    "lunar_j2000_km": {
+      "x": -60849.584272,
+      "y": -353062.643983,
+      "z": -187579.63853
+    },
+    "sun_j2000_km": {
+      "x": -96392357.214188,
+      "y": -103159066.00047,
+      "z": -44717108.333333
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112034436.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112034436.jpg"
+  },
+  {
+    "identifier": "20261112053238",
+    "timestamp_utc": "2026-11-12T05:27:49Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.682129,
+    "centroid_lon": 83.840332,
+    "dscovr_j2000_km": {
+      "x": -1123342.089958,
+      "y": -875125.422763,
+      "z": -291282.720396
+    },
+    "lunar_j2000_km": {
+      "x": -54626.493503,
+      "y": -354100.10017,
+      "z": -187770.676396
+    },
+    "sun_j2000_km": {
+      "x": -96242470.81961,
+      "y": -103273630.509382,
+      "z": -44766768.21118
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112053238.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112053238.jpg"
+  },
+  {
+    "identifier": "20261112072041",
+    "timestamp_utc": "2026-11-12T07:15:52Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.733398,
+    "centroid_lon": 56.843262,
+    "dscovr_j2000_km": {
+      "x": -1121660.327048,
+      "y": -876380.828139,
+      "z": -292277.36591
+    },
+    "lunar_j2000_km": {
+      "x": -48391.414217,
+      "y": -355047.301595,
+      "z": -187913.795554
+    },
+    "sun_j2000_km": {
+      "x": -96092400.871259,
+      "y": -103388035.200046,
+      "z": -44816359.031278
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112072041.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112072041.jpg"
+  },
+  {
+    "identifier": "20261112090843",
+    "timestamp_utc": "2026-11-12T09:03:55Z",
+    "caption": "This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft",
+    "centroid_lat": -11.77002,
+    "centroid_lon": 29.875488,
+    "dscovr_j2000_km": {
+      "x": -1119975.177481,
+      "y": -877633.970746,
+      "z": -293271.546975
+    },
+    "lunar_j2000_km": {
+      "x": -42144.033353,
+      "y": -355904.339681,
+      "z": -188009.03878
+    },
+    "sun_j2000_km": {
+      "x": -95942163.587066,
+      "y": -103502264.000124,
+      "z": -44865873.794591
+    },
+    "image_png_url": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/png/epic_1b_20261112090843.png",
+    "image_jpg_thumb": "https://epic.gsfc.nasa.gov/archive/natural/2026/11/12/thumbs/epic_1b_20261112090843.jpg"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "name": "astra-health",
+  "productName": "ASTRA Health",
+  "version": "1.0.0",
+  "description": "ASTRA Health: crew health monitoring that works offline and syncs with the online system.",
+  "author": "ASTRA Health team",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "web": "cd ../frontend && bun run build:desktop",
+    "prepare-app": "node scripts/prepare.cjs",
+    "start": "node scripts/prepare.cjs && electron .",
+    "dist": "node scripts/prepare.cjs && electron-builder --win nsis",
+    "publish-installer": "node scripts/publish.cjs",
+    "release": "bun run web && bun run dist && bun run publish-installer"
+  },
+  "build": {
+    "appId": "health.astra.desktop",
+    "productName": "ASTRA Health",
+    "artifactName": "ASTRA-Health-Setup-${version}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "db.cjs",
+      "app/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "ASTRA Health",
+      "deleteAppDataOnUninstall": false
+    },
+    "compression": "maximum",
+    "electronLanguages": [
+      "en-US",
+      "es",
+      "es-419"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
+  }
+}
