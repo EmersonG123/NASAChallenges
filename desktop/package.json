@@ -1,7 +1,7 @@
 {
   "name": "astra-health",
   "productName": "ASTRA Health",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ASTRA Health: crew health monitoring that works offline and syncs with the online system.",
   "author": "ASTRA Health team",
   "license": "UNLICENSED",

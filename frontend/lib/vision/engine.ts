@@ -571,11 +571,17 @@ export class VisionEngine {
   private loopDemo = () => {
     if (this.mode !== 'demo') return;
     const now = performance.now(); this.tickFps(now);
-    const s = ((now - this.demoStart) / 1000) * 2;
-    if (s > 80) { this.stop(false); this.on.event('demoDone'); return; }
-    const f = this.demoFrame(s); this.drawDemo(f); this.feed(s * 1000, f); this.drawStrip();
+    const s = Math.min(80, ((now - this.demoStart) / 1000) * 2);
+    // fixed step (30 simulated frames per second): the result is the same whether the screen gives 60 fps
+    // or the window is covered and the browser slows the animation down
+    const STEP = 1 / 30;
+    let f: Face | null = null;
+    while (this.demoS + STEP <= s) { this.demoS += STEP; f = this.demoFrame(this.demoS); this.feed(this.demoS * 1000, f); }
+    if (f) { this.drawDemo(f); this.drawStrip(); }
+    if (s >= 80) { this.stop(false); this.on.event('demoDone'); return; }
     this.raf = requestAnimationFrame(this.loopDemo);
   };
+  private demoS = 0;
 
   /* ---------- controls ---------- */
   private begin(m: Mode) {
@@ -598,7 +604,7 @@ export class VisionEngine {
     if (v.src) { URL.revokeObjectURL(v.src); v.removeAttribute('src'); v.load(); }
     if (was) { this.phase = 'stopped'; this.emit(true); if (user) this.on.event('stopped'); }
   }
-  startDemo() { this.begin('demo'); this.demoStart = performance.now(); this.on.event('demo'); this.loopDemo(); }
+  startDemo() { this.begin('demo'); this.demoStart = performance.now(); this.demoS = 0; this.on.event('demo'); this.loopDemo(); }
   /** cameras available (labels appear once permission was granted) */
   static async cameras(): Promise<{ id: string; label: string }[]> {
     if (!navigator.mediaDevices?.enumerateDevices) return [];

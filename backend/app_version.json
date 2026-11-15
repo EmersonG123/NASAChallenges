@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "url": "/downloads/ASTRA-Health-Setup.exe",
-  "notes": "Primera versión de escritorio: monitoreo sin conexión con base de datos SQLite local y sincronización con el sistema online."
+  "notes": "ASTRA Vision renovado: detección de ojos más precisa, microsueños, atención, calidad de señal, alertas con sonido, tendencia y resumen exportable. Bienestar y sueño: horario de sueño, deuda de sueño, horario recomendado, historial editable y fatiga de la cámara integrada."
 }

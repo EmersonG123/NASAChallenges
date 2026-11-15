@@ -37,7 +37,8 @@ function createWindow() {
     width: 1440, height: 920, minWidth: 380, minHeight: 600,
     title: 'ASTRA Health', backgroundColor: '#050B1A', show: false,
     icon: path.join(__dirname, 'build', 'icon.png'),
-    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: false, nodeIntegration: false },
+    // backgroundThrottling off: fatigue monitoring must keep running when the window is covered or minimized
+    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: false, nodeIntegration: false, backgroundThrottling: false },
   });
   win.once('ready-to-show', () => win.show());
   // external links open in the system browser; the app itself never navigates away
