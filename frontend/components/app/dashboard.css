@@ -684,3 +684,55 @@
 .well-start span { font-size: 13.5px; color: var(--text); }
 .well-summary .tiles.four { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 600px) { .well-summary .tiles.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- sign-in (online system) ---------- */
+/* margin:auto centres the card but never pushes it above the top edge on short screens */
+.dash.auth-page { display: flex; flex-direction: column; align-items: center; min-height: 100vh; min-height: 100dvh; padding: 24px 16px 40px; padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+.auth-top { position: absolute; top: 14px; right: 16px; display: flex; gap: 8px; }
+.auth-top .icon-d { min-width: 40px; height: 40px; }
+.auth-card { margin: auto 0; width: min(420px, 100%); padding: 28px 28px 22px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; box-shadow: var(--shadow); }
+.auth-brand { margin-bottom: 18px; }
+.auth-card h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+.auth-lead { margin: 4px 0 20px; font-size: 14px; color: var(--muted); }
+.auth-form { display: flex; flex-direction: column; gap: 14px; }
+.auth-form .field input { width: 100%; }
+.auth-pass { position: relative; display: block; }
+.auth-pass input { padding-right: 46px; }
+.auth-eye { position: absolute; top: 50%; right: 4px; transform: translateY(-50%); display: grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; }
+.auth-eye:hover { color: var(--primary); }
+.auth-submit { min-height: 44px; margin-top: 4px; font-size: 15px; }
+.auth-card > .inline-msg { margin-top: 16px; }
+.auth-foot { margin-top: 16px; text-align: center; }
+/* 16px inputs: iOS zooms into smaller fields on focus */
+.auth-form .field input { font-size: 16px; }
+@media (max-width: 600px) {
+  .dash.auth-page { padding: 12px 12px 28px; }
+  .auth-top { position: static; align-self: flex-end; margin-bottom: 12px; }
+  .auth-card { margin: auto 0 auto; padding: 22px 18px 18px; border-radius: 14px; }
+  .auth-brand { margin-bottom: 14px; }
+  .auth-card h1 { font-size: 23px; }
+  .auth-lead { margin-bottom: 16px; }
+}
+@media (max-width: 360px) {
+  .auth-card { padding: 18px 14px 16px; }
+  .auth-card > .inline-msg, .auth-foot { font-size: 12.5px; }
+}
+@media (max-height: 560px) and (max-width: 600px) {
+  .auth-card { margin-top: 0; }
+}
+.side-user { display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px; margin-bottom: 4px; border-bottom: 1px solid var(--border); min-width: 0; }
+.side-user .avatar { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); font: 700 13px var(--f-mono); text-transform: uppercase; }
+.side-user div { min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.side-user b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.side-user small { font: 11px var(--f-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- settings: account ---------- */
+.acct-form { display: flex; flex-direction: column; gap: 12px; }
+.acct-form .field input { width: 100%; font-size: 16px; }
+.acct-form .field input:disabled { opacity: .55; }
+.acct-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.acct-show { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); cursor: pointer; }
+.acct-show input { width: 16px; height: 16px; accent-color: var(--primary); }
+.acct-form .inline-msg { margin: 0; }
+.acct-actions { display: flex; justify-content: flex-end; padding-top: 4px; }
+@media (max-width: 600px) { .acct-two { grid-template-columns: minmax(0, 1fr); } .acct-actions .btn-d { width: 100%; } }

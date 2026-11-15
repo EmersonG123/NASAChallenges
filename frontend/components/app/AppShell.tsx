@@ -61,6 +61,22 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const textSize = useTextSize();
   const section = SECTIONS[path];
   const hash = useHash();
+  // online system: who is signed in (the desktop app has no login)
+  const [me, setMe] = useState<{ user: string; role: string } | null>(null);
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_ASTRA_TARGET === 'desktop') return;
+    let live = true;
+    const load = () => fetch('/auth/me').then((r) => (r.ok ? r.json() : null)).then((j) => { if (live && j?.user) setMe({ user: j.user, role: j.role }); }).catch(() => {});
+    void load();
+    window.addEventListener('astra-auth-change', load); // the account card changed the username
+    return () => { live = false; window.removeEventListener('astra-auth-change', load); };
+  }, []);
+  const logout = async () => {
+    try { await fetch('/auth/logout', { method: 'POST' }); } catch { /* offline: the cookie expires on its own */ }
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+    window.location.assign('/login');
+  };
+  const ROLE: Record<string, [string, string]> = { admin: ['Administrador', 'Administrator'], operador: ['Operador', 'Operator'], lector: ['Lector', 'Viewer'] };
 
   // the drawer closes on navigation; Escape closes it too
   // eslint-disable-next-line react-hooks/set-state-in-effect -- reset UI state on route change
@@ -94,12 +110,24 @@ export default function AppShell({ children }: { children: ReactNode }) {
           })}
         </nav>
         <div className="side-foot">
+          {me && (
+            <div className="side-user">
+              <span className="avatar" aria-hidden="true">{me.user.slice(0, 2)}</span>
+              <div><b>{me.user}</b><small>{ROLE[me.role] ? L(...ROLE[me.role]) : me.role}</small></div>
+            </div>
+          )}
           <Link href={SETTINGS[0]} className={`side-link${path === SETTINGS[0] ? ' on' : ''}`} aria-current={path === SETTINGS[0] ? 'page' : undefined}>
             <Icon d={SETTINGS[3]} />{L(SETTINGS[1], SETTINGS[2])}
           </Link>
-          <button type="button" className="side-link exit" onClick={exitSystem}>
-            <Icon d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11" />{L('Salir', 'Exit')}
-          </button>
+          {me ? (
+            <button type="button" className="side-link exit" onClick={() => void logout()}>
+              <Icon d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11" />{L('Cerrar sesión', 'Sign out')}
+            </button>
+          ) : (
+            <button type="button" className="side-link exit" onClick={exitSystem}>
+              <Icon d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11" />{L('Salir', 'Exit')}
+            </button>
+          )}
         </div>
       </aside>
       <button type="button" className="side-scrim" aria-label={L('Cerrar menú', 'Close menu')} onClick={() => setOpen(false)} tabIndex={open ? 0 : -1} />

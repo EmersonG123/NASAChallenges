@@ -7,6 +7,9 @@ const DESKTOP = process.env.ASTRA_TARGET === 'desktop';
 const API = process.env.ASTRA_API_URL || 'http://localhost:8000';
 
 const web: NextConfig = {
+  // *.web.ts(x) files (login, session routes, proxy) exist only in the online build;
+  // the desktop static export ignores them, so it has no login and no server code
+  pageExtensions: ['web.tsx', 'web.ts', 'tsx', 'ts', 'jsx', 'js'],
   async rewrites() {
     return [{ source: '/api/:path*', destination: `${API}/api/:path*` }];
   },

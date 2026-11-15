@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Badge, Card, type Tone } from '@/components/app/ui';
+import Account from '@/components/settings/Account';
 import { useSync } from '@/components/app/SyncContext';
 import { desktop, isDesktop, onlineBase, setOnlineBase, setSyncToken, syncToken } from '@/lib/platform';
 import { usePrefs } from '@/lib/prefs';
@@ -52,6 +53,7 @@ export default function Settings() {
       </header>
 
       <div className="grid-2">
+        <Account />
         <Card title={L('Apariencia', 'Appearance')}>
           <Row label={L('Idioma', 'Language')}>
             <div className="seg compact" role="group" aria-label={L('Idioma', 'Language')}>
